@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sum of last n node</title>
+    <style>
+        body {
+          margin: 0;
+          box-sizing: border-box;
+        }
+    
+        .container {
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .1));
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+    
+        h2 {
+          font-size: 1rem;
+          color: #fff;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          align-items: center;
+        }
+       
+      </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <h2>Find Sum of Last N node</h2>
+        <input class="array-input" id="array-input" placeholder="Enter Linked List">
+        <br>
+        <input id="array-output" value="" placeholder="Sum of last N nodes">
+        <br>
+        <button class="submit-array" id="submit-array" onclick="find()">Find</button>
+        <br>
+    </div>
+
+   <script>
+
+// JavaScript implementation to find the sum of
+// last 'n' nodes of the Linked List
+	
+	/* A Linked list node */
+	class Node
+	{
+		constructor()
+		{
+			this.data;
+			this.next;
+		}
+	}
+	
+	let head;
+	var n, sum;
+	// function to insert a node at the
+	// beginning of the linked list
+	function push(head_ref,new_data)
+	{
+		/* allocate node */
+	let new_node = new Node();
+	
+	/* put in the data */
+	new_node.data = new_data;
+	
+	/* link the old list to the new node */
+	new_node.next = head_ref;
+	
+	/* move the head to point to the new node */
+	head_ref = new_node;
+	head = head_ref;
+	}
+	
+	// function to recursively find the sum of last
+	// 'n' nodes of the given linked list
+	function sumOfLastN_Nodes(head)
+	{
+		// if head = NULL
+	if (head == null)
+		return;
+
+	// recursively traverse the remaining nodes
+	sumOfLastN_Nodes(head.next);
+
+	// if node count 'n' is greater than 0
+	if (n > 0)
+	{
+
+		// accumulate sum
+		sum = sum + head.data;
+
+		// reduce node count 'n' by 1
+		--n;
+	}
+	}
+	
+	// utility function to find the sum of last 'n' nodes
+	function sumOfLastN_NodesUtil(head,n)
+	{
+		// if n == 0
+	if (n <= 0)
+		return 0;
+
+	sum = 0;
+
+	// find the sum of last 'n' nodes
+	sumOfLastN_Nodes(head);
+
+	// required sum
+	return sum;
+	}
+	const arrayInput =  (letParse) => {
+           const parse = document.getElementById("array-input").value;
+           let reg = /\d+/g;
+           let result = parse.match(reg);
+           return result;
+        }
+	// Driver Code
+	head = null;
+    function find(){
+            const array = arrayInput(document.getElementById('array-input').value);
+           for(var i=array.length-1; i>=0; i--){
+            str = parseInt( array[i], 10 )
+            push(head, str);
+           }
+           n = prompt("enter Number of Last Node");
+           document.getElementById("array-output").value = sumOfLastN_NodesUtil(head, n);
+
+        }
+</script> 
+</body>
+</html>
