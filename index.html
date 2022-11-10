@@ -49,10 +49,9 @@
 
    <script>
 
-// JavaScript implementation to find the sum of
-// last 'n' nodes of the Linked List
+
 	
-	/* A Linked list node */
+	
 	class Node
 	{
 		constructor()
@@ -64,60 +63,58 @@
 	
 	let head;
 	var n, sum;
-	// function to insert a node at the
-	// beginning of the linked list
+	
 	function push(head_ref,new_data)
 	{
-		/* allocate node */
+		
 	let new_node = new Node();
 	
-	/* put in the data */
+	
 	new_node.data = new_data;
 	
-	/* link the old list to the new node */
+	
 	new_node.next = head_ref;
 	
-	/* move the head to point to the new node */
+	
 	head_ref = new_node;
 	head = head_ref;
 	}
 	
-	// function to recursively find the sum of last
-	// 'n' nodes of the given linked list
+	
 	function sumOfLastN_Nodes(head)
 	{
-		// if head = NULL
+		
 	if (head == null)
 		return;
 
-	// recursively traverse the remaining nodes
+	
 	sumOfLastN_Nodes(head.next);
 
-	// if node count 'n' is greater than 0
+	
 	if (n > 0)
 	{
 
-		// accumulate sum
+		
 		sum = sum + head.data;
 
-		// reduce node count 'n' by 1
+		
 		--n;
 	}
 	}
 	
-	// utility function to find the sum of last 'n' nodes
+	
 	function sumOfLastN_NodesUtil(head,n)
 	{
-		// if n == 0
+		
 	if (n <= 0)
 		return 0;
 
 	sum = 0;
 
-	// find the sum of last 'n' nodes
+	
 	sumOfLastN_Nodes(head);
 
-	// required sum
+	
 	return sum;
 	}
 	const arrayInput =  (letParse) => {
@@ -126,10 +123,13 @@
            let result = parse.match(reg);
            return result;
         }
-	// Driver Code
+	
 	head = null;
     function find(){
             const array = arrayInput(document.getElementById('array-input').value);
+            if(!array){
+                alert("Please Enter A valid Input");
+            }
            for(var i=array.length-1; i>=0; i--){
             str = parseInt( array[i], 10 )
             push(head, str);
